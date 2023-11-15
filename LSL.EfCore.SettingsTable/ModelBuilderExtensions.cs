@@ -22,8 +22,8 @@ namespace LSL.EfCore.SettingsTable
             
             settingsTable.ToTable(tableName);
             settingsTable.HasKey(s => s.Key);
-            settingsTable.Property(s => s.Key).HasField(keyFieldName);
-            settingsTable.Property(s => s.Value).HasField(valueFieldName);
+            settingsTable.Property(s => s.Key).HasColumnName(keyFieldName);
+            settingsTable.Property(s => s.Value).HasColumnName(valueFieldName);
 
             return source;
         }
