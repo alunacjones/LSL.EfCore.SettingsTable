@@ -6,7 +6,7 @@
 
 This package provides `ModelBuilder` extension methods to allow you to produce a settings table.
 
->NOTE: You will still need to create migrations to ensure the tables gets created. Please see [here](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli) for further details.
+>NOTE: You will still need to create migrations to ensure the table gets created. Please see [here](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli) for further details.
 
 
 To add the required entities to your `DbContext` then following should be added to `OnModelCreating` as below:
@@ -29,7 +29,7 @@ The default table name is `Settings` with a `Key` field called `Key` and a value
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         ...
-        modelBuilder.AddRebusSagaTablesForSqlServer("CustomSettingsTable", "CustomKeyField", "CustomValueField");
+        modelBuilder.AddSettingsTable("CustomSettingsTable", "CustomKeyField", "CustomValueField");
         ...
     }
 ```
