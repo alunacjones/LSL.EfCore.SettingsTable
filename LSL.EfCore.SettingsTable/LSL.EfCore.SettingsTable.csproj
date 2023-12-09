@@ -14,9 +14,9 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <Version>1.0.1</Version>
     <PackageVersion>1.0.1</PackageVersion>
-    <PackageTags></PackageTags>
+    <PackageTags>entity-framework-core;entity;framework;core;ef;efcore;ef-core;settings-table;settings;table</PackageTags>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <PackageDescription>Description here</PackageDescription>
+    <PackageDescription>A library to add a settings table to a DB Context for EFCore</PackageDescription>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/alunacjones/LSL.EfCore.SettingsTable</RepositoryUrl>
     <Authors>alunacjones</Authors>
