@@ -9,6 +9,8 @@ This package provides `ModelBuilder` extension methods to allow you to produce a
 >NOTE: You will still need to create migrations to ensure the table gets created. Please see [here](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli) for further details.
 
 
+## Quickstart
+
 To add the required entities to your `DbContext` then following should be added to `OnModelCreating` as below:
 
 ```csharp
@@ -33,3 +35,20 @@ The default table name is `Settings` with a `Key` field called `Key` and a value
         ...
     }
 ```
+
+## Finer grained control
+
+Another extension method exists that allows for finer-grained control over the entity used and its EF Core configuration:
+
+```csharp
+using LSL.EfCore.SettingsTable;
+...
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    ...
+    modelBuilder.AddSettingsTable<OtherSettings>(c => c.ConfigureEntity(e => e.HasKey(ee => ee.MyKey)));
+    ...
+}
+```
+
+In the example above the delegate passed into `ConfigureEntity` receives an `EntityTypeBuilder<OtherSettings>` to configure the EF Core entity
