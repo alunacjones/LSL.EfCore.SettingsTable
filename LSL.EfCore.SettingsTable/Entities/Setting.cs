@@ -8,19 +8,13 @@ namespace LSL.EfCore.SettingsTable.Entities
     /// A Key/Value Setting
     /// </summary>
     [ExcludeFromCodeCoverage]
-    public class Setting
+    public class Setting : ISetting
     {
-        /// <summary>
-        /// The setting key
-        /// </summary>
-        /// <value></value>
+        /// <inheritdoc/>
         [MaxLength(450)]
         public string Key { get; set; }
 
-        /// <summary>
-        /// The settings value
-        /// </summary>
-        /// <value></value>
+        /// <inheritdoc/>
         public string Value { get; set; }
     }
 }

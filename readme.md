@@ -36,6 +36,38 @@ The default table name is `Settings` with a `Key` field called `Key` and a value
     }
 ```
 
+## Using a custom entity
+
+If you want more fields in your entity then create your own class and have it implement the `ISetting` interface to get the benefit of index generation.
+
+```csharp
+...
+// This lives in an entity class file
+using LSL.EfCore.SettingsTable.Entities;
+
+namespace YourEntityNamespace;
+
+public class MySetting : ISetting
+{
+    public string Key { get; set; }
+    public string Value { get; set; }
+    public DateTime CreatedAt { get; set; }
+}
+
+...
+// This is put in your DbContext
+using LSL.EfCore.SettingsTable;
+using YourEntityNamespace;
+...
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    ...
+    // as per the previous examples for the non-generic AddSettingsTable method, all parameters here are optional
+    modelBuilder.AddSettingsTable<MySetting>("CustomSettingsTable", "CustomKeyField", "CustomValueField");
+    ...
+}
+```
+
 ## Finer grained control
 
 Another extension method exists that allows for finer-grained control over the entity used and its EF Core configuration:

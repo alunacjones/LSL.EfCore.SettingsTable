@@ -1,4 +1,5 @@
 using System;
+using LSL.EfCore.SettingsTable.Entities;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
@@ -41,7 +42,13 @@ namespace LSL.EfCore.SettingsTable.Tests
                         TableName = "OtherSettings",
                         Fields = $"MyKey:nvarchar(450),MyValue:nvarchar(max)",
                         Keys = $"Key: OtherSettings.MyKey PK"
-                    },                    
+                    },   
+                    new TestEntityModel
+                    {
+                        TableName = "YetAnotherSettingsTable",
+                        Fields = "AnotherKey:nvarchar(450),AnotherValue:nvarchar(max),CreatedAt:datetime2",
+                        Keys = "Key: SomeISettingImplementer.Key PK"
+                    }
                 });
         }
 
@@ -52,6 +59,13 @@ namespace LSL.EfCore.SettingsTable.Tests
                 public long Id { get; set; }
                 public string Name { get; set; }
                 public string Value { get; set; }                
+            }
+
+            internal class SomeISettingImplementer : ISetting
+            {
+                public string Key { get; set; }
+                public string Value { get; set; }
+                public DateTime CreatedAt { get; set; }
             }
 
             internal class OtherSettings 
@@ -68,6 +82,8 @@ namespace LSL.EfCore.SettingsTable.Tests
             {
                 modelBuilder.AddSettingsTable<CustomSettings>(c => c.ConfigureEntity(e => e.HasKey(ee => ee.Id)));
                 modelBuilder.AddSettingsTable<OtherSettings>(c => c.ConfigureEntity(e => e.HasKey(ee => ee.MyKey)));
+                modelBuilder.AddSettingsTable<SomeISettingImplementer>();
+                modelBuilder.AddSettingsTable<SomeISettingImplementer>("YetAnotherSettingsTable", "AnotherKey", "AnotherValue");
             }
         }
 
