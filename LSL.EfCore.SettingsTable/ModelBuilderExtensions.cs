@@ -17,19 +17,8 @@ namespace LSL.EfCore.SettingsTable
         /// <param name="keyFieldName">The name of the key field</param>
         /// <param name="valueFieldName">The name of the value field</param>
         /// <returns></returns>
-        public static ModelBuilder AddSettingsTable(this ModelBuilder source, string tableName = "Settings", string keyFieldName = "Key", string valueFieldName = "Value")
-        {
-            return source.AddSettingsTable<Setting>(c =>
-            {
-                c.ConfigureEntity(settingsTable =>
-                {
-                    settingsTable.ToTable(tableName);
-                    settingsTable.HasKey(s => s.Key);
-                    settingsTable.Property(s => s.Key).HasColumnName(keyFieldName);
-                    settingsTable.Property(s => s.Value).HasColumnName(valueFieldName);
-                });
-            });
-        }
+        public static ModelBuilder AddSettingsTable(this ModelBuilder source, string tableName = "Settings", string keyFieldName = "Key", string valueFieldName = "Value") => 
+            source.AddSettingsTable<Setting>(tableName, keyFieldName, valueFieldName);
 
         /// <summary>
         /// Adds a Settings table to the EFCore DbContext using an ISetting implementing entity class
